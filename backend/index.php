@@ -130,32 +130,55 @@ $alumnos = $stmt->fetchAll();
         </tbody>
     </table>
 
-    <!-- Modales de edición -->
-    <?php foreach ($alumnos as $a): ?>
-        <div class="modal fade" id="modalEditar<?= $a['id'] ?>" tabindex="-1">
-            <div class="modal-dialog">
-                <form class="modal-content" method="POST" action="editar_alumno.php">
-                    <input type="hidden" name="id" value="<?= $a['id'] ?>">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Editar Alumno</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="text" name="nombre" class="form-control mb-2" value="<?= htmlspecialchars($a['nombre']) ?>" required>
-                        <input type="text" name="apellido" class="form-control mb-2" value="<?= htmlspecialchars($a['apellido']) ?>" required>
-                        <input type="text" name="grado" class="form-control mb-2" value="<?= htmlspecialchars($a['grado']) ?>" required>
-                        <input type="text" name="seccion" class="form-control mb-2" value="<?= htmlspecialchars($a['seccion']) ?>" required>
-                        <input type="text" name="nivel" class="form-control mb-2" value="<?= htmlspecialchars($a['nivel']) ?>" required>
-                        <input type="text" name="telefono" class="form-control mb-2" value="<?= htmlspecialchars($a['telefono']) ?>">
-                        <input type="text" name="dni" class="form-control mb-2" value="<?= htmlspecialchars($a['dni']) ?>" required>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                    </div>
-                </form>
-            </div>
+  <?php foreach ($alumnos as $a): ?>
+    <div class="modal fade" id="modalEditar<?= $a['id'] ?>" tabindex="-1">
+        <div class="modal-dialog">
+            <form class="modal-content" method="POST" action="editar_alumno.php">
+                <input type="hidden" name="id" value="<?= $a['id'] ?>">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Alumno</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" name="nombre" class="form-control mb-2" value="<?= htmlspecialchars($a['nombre']) ?>" required>
+                    <input type="text" name="apellido" class="form-control mb-2" value="<?= htmlspecialchars($a['apellido']) ?>" required>
+                    
+                    <!-- Combo para grado -->
+                    <select name="grado" class="form-select mb-2" required>
+                        <option value="1ro" <?= $a['grado'] == '1ro' ? 'selected' : '' ?>>1ro</option>
+                        <option value="2do" <?= $a['grado'] == '2do' ? 'selected' : '' ?>>2do</option>
+                        <option value="3ro" <?= $a['grado'] == '3ro' ? 'selected' : '' ?>>3ro</option>
+                        <option value="4to" <?= $a['grado'] == '4to' ? 'selected' : '' ?>>4to</option>
+                        <option value="5to" <?= $a['grado'] == '5to' ? 'selected' : '' ?>>5to</option>
+                        <option value="6to" <?= $a['grado'] == '6to' ? 'selected' : '' ?>>6to</option>
+                    </select>
+
+                    <!-- Combo para sección -->
+                    <select name="seccion" class="form-select mb-2" required>
+                        <option value="A" <?= $a['seccion'] == 'A' ? 'selected' : '' ?>>A</option>
+                        <option value="B" <?= $a['seccion'] == 'B' ? 'selected' : '' ?>>B</option>
+                        <option value="C" <?= $a['seccion'] == 'C' ? 'selected' : '' ?>>C</option>
+                        <option value="D" <?= $a['seccion'] == 'D' ? 'selected' : '' ?>>D</option>
+                        <option value="E" <?= $a['seccion'] == 'E' ? 'selected' : '' ?>>E</option>
+                    </select>
+
+                    <!-- Combo para nivel -->
+                    <select name="nivel" class="form-select mb-2" required>
+                        <option value="Primaria" <?= $a['nivel'] == 'Primaria' ? 'selected' : '' ?>>Primaria</option>
+                        <option value="Secundaria" <?= $a['nivel'] == 'Secundaria' ? 'selected' : '' ?>>Secundaria</option>
+                    </select>
+
+                    <input type="text" name="telefono" class="form-control mb-2" value="<?= htmlspecialchars($a['telefono']) ?>">
+                    <input type="text" name="dni" class="form-control mb-2" value="<?= htmlspecialchars($a['dni']) ?>" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                </div>
+            </form>
         </div>
-    <?php endforeach; ?>
+    </div>
+<?php endforeach; ?>
+
 
     <script>
         const form = document.getElementById('filtrosForm');
