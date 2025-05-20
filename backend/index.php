@@ -54,16 +54,49 @@ $alumnos = $stmt->fetchAll();
 
     <!-- Formulario de Agregar -->
     <form action="guardar_alumno.php" method="POST" class="row g-3 mb-4">
-        <div class="col-md-3"><input type="text" name="nombre" class="form-control" placeholder="Nombre" required></div>
-        <div class="col-md-3"><input type="text" name="apellido" class="form-control" placeholder="Apellido" required></div>
-        <div class="col-md-2"><input type="text" name="grado" class="form-control" placeholder="Grado" required></div>
-        <div class="col-md-2"><input type="text" name="seccion" class="form-control" placeholder="Sección" required></div>
-        <div class="col-md-2"><input type="text" name="nivel" class="form-control" placeholder="Nivel" required></div>
-        <div class="col-md-3"><input type="text" name="telefono" class="form-control" placeholder="Teléfono"></div>
-        <div class="col-md-3"><input type="password" name="password" class="form-control" placeholder="Contraseña"></div>
-        <div class="col-md-3"><input type="text" name="dni" class="form-control" placeholder="DNI" required></div>
-        <div class="col-md-3"><button class="btn btn-primary w-100">Agregar Alumno</button></div>
-    </form>
+    <div class="col-md-3"><input type="text" name="nombre" class="form-control" placeholder="Nombre" required></div>
+    <div class="col-md-3"><input type="text" name="apellido" class="form-control" placeholder="Apellido" required></div>
+
+    <!-- Combo box para grado -->
+    <div class="col-md-2">
+        <select name="grado" class="form-select" required>
+            <option value="">Grado</option>
+            <option value="1ro">1ro</option>
+            <option value="2do">2do</option>
+            <option value="3ro">3ro</option>
+            <option value="4to">4to</option>
+            <option value="5to">5to</option>
+            <option value="6to">6to</option>
+        </select>
+    </div>
+
+    <!-- Combo box para sección -->
+    <div class="col-md-2">
+        <select name="seccion" class="form-select" required>
+            <option value="">Sección</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+        </select>
+    </div>
+
+    <!-- Combo box para nivel -->
+    <div class="col-md-2">
+        <select name="nivel" class="form-select" required>
+            <option value="">Nivel</option>
+            <option value="Primaria">Primaria</option>
+            <option value="Secundaria">Secundaria</option>
+        </select>
+    </div>
+
+    <div class="col-md-3"><input type="text" name="telefono" class="form-control" placeholder="Teléfono"></div>
+    <div class="col-md-3"><input type="password" name="password" class="form-control" placeholder="Contraseña"></div>
+    <div class="col-md-3"><input type="text" name="dni" class="form-control" placeholder="DNI" required></div>
+    <div class="col-md-3"><button class="btn btn-primary w-100">Agregar Alumno</button></div>
+</form>
+
 
     <!-- Filtros (con envío automático) -->
     <form method="GET" class="row g-2 mb-3" id="filtrosForm">
@@ -119,17 +152,24 @@ $alumnos = $stmt->fetchAll();
                     <!-- Editar -->
                     <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditar<?= $a['id'] ?>">Editar</button>
 
+                    <form action="eliminar_alumno.php" method="POST" class="d-inline" onsubmit="return confirm('¿Seguro que quieres eliminar este alumno?');">
+                        <input type="hidden" name="id" value="<?= $a['id'] ?>">
+                        <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                    </form>
+
+
                     <!-- QR -->
                     <form action="generar_qr.php" method="POST" class="d-inline">
                         <input type="hidden" name="texto" value="<?= $a['dni'] ?>">
                         <button class="btn btn-sm btn-success" type="submit">QR</button>
                     </form>
+
                 </td>
             </tr>
         <?php endforeach; ?>
         </tbody>
     </table>
-
+<!-- Modal para editar -->
   <?php foreach ($alumnos as $a): ?>
     <div class="modal fade" id="modalEditar<?= $a['id'] ?>" tabindex="-1">
         <div class="modal-dialog">
