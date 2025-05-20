@@ -1,4 +1,5 @@
 <?php
+require 'auth.php';
 include 'conexion.php';
 
 // Obtener valores únicos para combo box
