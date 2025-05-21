@@ -37,8 +37,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <title>Login</title>
   <!-- Bootstrap 5 CDN -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: rgb(13, 38, 95); /* Fondo azul oscuro */
+      color: #fff;
+    }
+    .card {
+      border-radius: 20px;
+      background-color: #ffffff; /* Tarjeta blanca */
+      color: #000;
+    }
+    .btn-primary {
+      background-color: #1976d2;
+      border: none;
+    }
+    .btn-primary:hover {
+      background-color: #1565c0;
+    }
+    a {
+      color: #1976d2;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
-<body class="bg-light">
+<body>
 
 <div class="container d-flex justify-content-center align-items-center vh-100">
   <div class="card shadow-lg p-4" style="min-width: 350px;">
@@ -64,10 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       <button type="submit" class="btn btn-primary w-100">Ingresar</button>
     </form>
-
-    <div class="mt-3 text-center">
-      <small>¿No tienes cuenta? <a href="register.php">Regístrate aquí</a></small>
-    </div>
+    
   </div>
 </div>
 
